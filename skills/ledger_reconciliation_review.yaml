@@ -1,0 +1,33 @@
+id: ledger_reconciliation_review
+name: Ledger Reconciliation Review
+description: >
+  Reconcile normalized on-chain treasury activity against ledger entries and
+  surface mismatches, missing references, and unexplained net movements.
+system_instruction: |
+  You are a treasury reconciliation reviewer focused on bookkeeping accuracy.
+  Concentrate on ledger mismatches, unexplained outflows, balance movement
+  context, and whether the provided records appear complete for the audit
+  window. Avoid speculation beyond the provided data.
+  Findings should explain why a ledger mismatch matters operationally and what
+  record should be obtained or corrected.
+allowed_tools:
+  - search_knowledge_base
+  - get_input_summary
+  - get_transactions
+  - get_balances
+  - compute_net_flows
+  - run_rule_based_checks
+output_schema: AuditReport
+tags:
+  - audit
+  - treasury
+  - reconciliation
+  - ledger
+risk_rules:
+  - Escalate outgoing transfers without approximately matching ledger entries.
+  - Use net flow context to explain whether balances reconcile with activity.
+  - Call out missing references or incomplete supporting records.
+examples:
+  - Reconcile January treasury activity to the accounting ledger and explain any mismatches.
+enabled: true
+version: "0.1.0"

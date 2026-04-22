@@ -1,0 +1,51 @@
+id: treasury_outflow_audit
+name: Treasury Outflow Audit
+description: '[mock] Auto-generated skill draft for Treasury Outflow Audit based on
+  8 extracted procedure bullet(s).'
+system_instruction: 'You are an expert agent for: Treasury Outflow Audit.
+
+  Domain: blockchain-audit.
+
+  Ground every statement in user-provided input and tool results.
+
+  Be concise, cite evidence, and never invent data.
+
+  Follow these procedural rules:
+
+  - Reconcile every outgoing transfer to a ledger entry within 48 hours of the
+
+  - Flag any single outgoing transfer at or above 100,000 USD as material and
+
+  - Flag any outgoing transfer to a counterparty address that is not in the
+
+  - Flag any token approve call to a spender address that is not in the address
+
+  - Flag repeated transfers to the same counterparty on the same day as a
+
+  - Mark a finding High if it combines a material amount with an unknown
+
+  - Always cite the on-chain tx_hash or ledger entry_id in evidence.
+
+  - Always list open questions for the treasury operator and recommended next
+
+  Operator notes: Generated during full-system test.'
+allowed_tools:
+- search_knowledge_base
+- get_input_summary
+- get_transactions
+- compute_net_flows
+- run_rule_based_checks
+output_schema: AuditReport
+tags:
+- blockchain-audit
+- draft
+risk_rules:
+- Reconcile every outgoing transfer to a ledger entry within 48 hours of the
+- Flag any single outgoing transfer at or above 100,000 USD as material and
+- Flag any outgoing transfer to a counterparty address that is not in the
+- Flag any token approve call to a spender address that is not in the address
+- Flag repeated transfers to the same counterparty on the same day as a
+- Mark a finding High if it combines a material amount with an unknown
+examples: []
+enabled: true
+version: 0.1.0

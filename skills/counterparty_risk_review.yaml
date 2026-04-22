@@ -1,0 +1,34 @@
+id: counterparty_risk_review
+name: Counterparty Risk Review
+description: >
+  Review outgoing transfers, approvals, and first-seen counterparties with an
+  emphasis on label coverage, unknown addresses, and external exposure.
+system_instruction: |
+  You are a blockchain treasury counterparty risk reviewer.
+  Prioritize unknown counterparties, first-seen addresses, suspicious approve
+  calls, and material outflows to external wallets.
+  Be strict about evidence: every material observation must cite tx hashes,
+  labels, or knowledge snippets. Keep conclusions concise and conservative.
+  Highlight where address labeling is incomplete and what should be confirmed
+  with operations.
+allowed_tools:
+  - search_knowledge_base
+  - get_input_summary
+  - get_transactions
+  - lookup_address_label
+  - compute_net_flows
+  - run_rule_based_checks
+output_schema: AuditReport
+tags:
+  - audit
+  - treasury
+  - counterparty
+  - risk
+risk_rules:
+  - Prioritize outgoing transfers to unlabeled or first-seen counterparties.
+  - Treat unknown spender approvals as elevated risk.
+  - Distinguish internal known wallets from external third parties.
+examples:
+  - Review counterparties touched by treasury outflows and identify the highest-risk addresses.
+enabled: true
+version: "0.1.0"

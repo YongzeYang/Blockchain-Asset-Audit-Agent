@@ -1,0 +1,7 @@
+{
+  "0x1111111111111111111111111111111111111111": "Treasury Hot Wallet",
+  "0x2222222222222222222222222222222222222222": "Internal Cold Storage",
+  "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": "Coinbase Deposit",
+  "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb": "Binance Deposit",
+  "0xcccccccccccccccccccccccccccccccccccccccc": "Internal Operations Wallet"
+}

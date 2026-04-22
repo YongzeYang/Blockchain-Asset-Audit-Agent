@@ -1,0 +1,24 @@
+[
+  {
+    "tx_hash": "0xtx1",
+    "timestamp": "2026-01-05T10:12:00+00:00",
+    "chain": "ethereum",
+    "from_address": "0x1111111111111111111111111111111111111111",
+    "to_address": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "asset_symbol": "USDC",
+    "amount": 25000,
+    "direction": "out",
+    "tx_type": "transfer"
+  },
+  {
+    "tx_hash": "0xtx2",
+    "timestamp": "2026-01-08T14:30:00+00:00",
+    "chain": "ethereum",
+    "from_address": "0x1111111111111111111111111111111111111111",
+    "to_address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead",
+    "asset_symbol": "USDC",
+    "amount": 250000,
+    "direction": "out",
+    "tx_type": "transfer"
+  }
+]

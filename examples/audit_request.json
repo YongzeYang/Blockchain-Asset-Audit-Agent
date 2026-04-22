@@ -1,0 +1,140 @@
+{
+  "skill_id": "asset_audit_basic",
+  "objective": "Audit outgoing treasury transfers, identify unknown counterparties, and explain any material anomalies.",
+  "chain": "ethereum",
+  "addresses": [
+    "0x1111111111111111111111111111111111111111",
+    "0x2222222222222222222222222222222222222222"
+  ],
+  "time_range": {
+    "start": "2026-01-01T00:00:00+00:00",
+    "end": "2026-01-31T23:59:59+00:00"
+  },
+  "transactions": [
+    {
+      "tx_hash": "0xtx1",
+      "timestamp": "2026-01-05T10:12:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0x1111111111111111111111111111111111111111",
+      "to_address": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "asset_symbol": "USDC",
+      "amount": 25000,
+      "direction": "out",
+      "tx_type": "transfer"
+    },
+    {
+      "tx_hash": "0xtx2",
+      "timestamp": "2026-01-08T14:30:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0x1111111111111111111111111111111111111111",
+      "to_address": "0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead",
+      "asset_symbol": "USDC",
+      "amount": 250000,
+      "direction": "out",
+      "tx_type": "transfer",
+      "notes": "large outgoing to unknown counterparty"
+    },
+    {
+      "tx_hash": "0xtx3",
+      "timestamp": "2026-01-09T09:00:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "to_address": "0x1111111111111111111111111111111111111111",
+      "asset_symbol": "USDC",
+      "amount": 100000,
+      "direction": "in",
+      "tx_type": "transfer"
+    },
+    {
+      "tx_hash": "0xtx4",
+      "timestamp": "2026-01-15T16:45:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0x1111111111111111111111111111111111111111",
+      "to_address": "0xfeedfeedfeedfeedfeedfeedfeedfeedfeedfeed",
+      "asset_symbol": "USDC",
+      "amount": 5000,
+      "direction": "out",
+      "tx_type": "approve",
+      "notes": "approve to unknown spender"
+    },
+    {
+      "tx_hash": "0xtx5",
+      "timestamp": "2026-01-20T11:00:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0x1111111111111111111111111111111111111111",
+      "to_address": "0xcccccccccccccccccccccccccccccccccccccccc",
+      "asset_symbol": "ETH",
+      "amount": 2.5,
+      "direction": "out",
+      "tx_type": "transfer"
+    },
+    {
+      "tx_hash": "0xtx6",
+      "timestamp": "2026-01-20T15:30:00+00:00",
+      "chain": "ethereum",
+      "from_address": "0x1111111111111111111111111111111111111111",
+      "to_address": "0xcccccccccccccccccccccccccccccccccccccccc",
+      "asset_symbol": "ETH",
+      "amount": 1.2,
+      "direction": "out",
+      "tx_type": "transfer"
+    }
+  ],
+  "balances": [
+    {
+      "address": "0x1111111111111111111111111111111111111111",
+      "chain": "ethereum",
+      "asset_symbol": "USDC",
+      "amount": 1500000,
+      "usd_value": 1500000,
+      "timestamp": "2026-01-31T23:59:00+00:00"
+    },
+    {
+      "address": "0x2222222222222222222222222222222222222222",
+      "chain": "ethereum",
+      "asset_symbol": "ETH",
+      "amount": 120.5,
+      "usd_value": 360000,
+      "timestamp": "2026-01-31T23:59:00+00:00"
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "L-001",
+      "timestamp": "2026-01-05T10:00:00+00:00",
+      "asset_symbol": "USDC",
+      "amount": 25000,
+      "direction": "out",
+      "counterparty": "Coinbase Deposit",
+      "reference": "INV-2026-001"
+    },
+    {
+      "entry_id": "L-002",
+      "timestamp": "2026-01-20T11:00:00+00:00",
+      "asset_symbol": "ETH",
+      "amount": 2.5,
+      "direction": "out",
+      "counterparty": "Operations",
+      "reference": "OPS-2026-001"
+    },
+    {
+      "entry_id": "L-003",
+      "timestamp": "2026-01-20T15:30:00+00:00",
+      "asset_symbol": "ETH",
+      "amount": 1.2,
+      "direction": "out",
+      "counterparty": "Operations",
+      "reference": "OPS-2026-002"
+    }
+  ],
+  "address_labels": {
+    "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": "Coinbase Deposit"
+  },
+  "knowledge_texts": [
+    "Treasury policy: any single outgoing transfer >= 100,000 USD must be pre-approved by the CFO."
+  ],
+  "extra_notes": "January monthly audit cycle.",
+  "metadata": {
+    "audit_period": "2026-01"
+  }
+}

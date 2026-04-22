@@ -1,0 +1,20 @@
+id: skill_generator_basic
+name: Skill Generator (Basic)
+description: >
+  Convert an expert SOP text into a reusable skill definition draft.
+system_instruction: |
+  You transform an expert's standard operating procedure (SOP) into a minimal,
+  reusable AI skill definition. Avoid overengineering. Keep allowed_tools to
+  the smallest practical set. Produce a concrete system_instruction that an
+  agent can follow. Use clear, professional descriptions.
+allowed_tools:
+  - search_knowledge_base
+output_schema: SkillDefinition
+tags:
+  - meta
+  - skill-generation
+risk_rules: []
+examples:
+  - "Convert this treasury audit SOP into a reusable skill."
+enabled: true
+version: "0.1.0"

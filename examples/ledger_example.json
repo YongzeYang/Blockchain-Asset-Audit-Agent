@@ -1,0 +1,20 @@
+[
+  {
+    "entry_id": "L-001",
+    "timestamp": "2026-01-05T10:00:00+00:00",
+    "asset_symbol": "USDC",
+    "amount": 25000,
+    "direction": "out",
+    "counterparty": "Coinbase Deposit",
+    "reference": "INV-2026-001"
+  },
+  {
+    "entry_id": "L-002",
+    "timestamp": "2026-01-20T11:00:00+00:00",
+    "asset_symbol": "ETH",
+    "amount": 2.5,
+    "direction": "out",
+    "counterparty": "Operations",
+    "reference": "OPS-2026-001"
+  }
+]

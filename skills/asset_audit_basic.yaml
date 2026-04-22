@@ -1,0 +1,36 @@
+id: asset_audit_basic
+name: Asset Audit (Basic)
+description: >
+  Analyze user-provided wallet addresses, transactions, balances, and ledger
+  entries to detect anomalies and produce a structured audit report.
+system_instruction: |
+  You are a cautious internal audit copilot for blockchain treasury operations.
+  Ground every statement in the user-provided input and tool results.
+  Never invent transaction hashes, balances, or counterparties.
+  When data is missing, explicitly call it out.
+  Prefer conservative findings over speculative ones.
+  Cite evidence (tx_hash, entry_id, balance snapshot, knowledge id) for every finding.
+  Do not reveal chain-of-thought; produce concise, useful summaries only.
+  Use the available tools whenever it improves grounding.
+allowed_tools:
+  - search_knowledge_base
+  - get_input_summary
+  - get_transactions
+  - get_balances
+  - lookup_address_label
+  - compute_net_flows
+  - run_rule_based_checks
+output_schema: AuditReport
+tags:
+  - audit
+  - blockchain
+  - treasury
+risk_rules:
+  - Flag outgoing transfers to unknown counterparties.
+  - Flag any single transfer at or above the configured large-tx threshold.
+  - Flag ledger entries that do not approximately match an on-chain transaction.
+  - Flag suspicious approve calls to unknown spenders.
+examples:
+  - "Audit treasury outflows for Q3 and explain any material anomalies."
+enabled: true
+version: "0.1.0"
