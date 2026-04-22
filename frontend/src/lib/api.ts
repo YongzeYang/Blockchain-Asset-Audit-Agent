@@ -9,14 +9,6 @@ function resolveBaseUrl(): string {
     return explicitBaseUrl;
   }
 
-  if (import.meta.env.DEV) {
-    return '/api';
-  }
-
-  if (typeof window !== 'undefined') {
-    return `${window.location.protocol}//${window.location.hostname}:8042`;
-  }
-
   return '/api';
 }
 
