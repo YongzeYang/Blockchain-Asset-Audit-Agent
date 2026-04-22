@@ -127,10 +127,11 @@ fi
 
 if [[ ! -f frontend/.env.local ]]; then
   cat > frontend/.env.local <<EOF
-# Leave VITE_API_BASE_URL empty for dev mode (uses Vite proxy /api -> :${BACKEND_PORT}).
-# For production deployment, the deploy script serves dist/ as static files and the
-# frontend will call the backend at the URL below. Adjust to your public host.
-VITE_API_BASE_URL=http://localhost:${BACKEND_PORT}
+# Leave empty to use the default same-origin /api base URL.
+# - Local dev: Vite proxies /api -> http://localhost:${BACKEND_PORT}
+# - Nginx deploy: /api can be reverse-proxied to 127.0.0.1:${BACKEND_PORT}
+# Set this only when you want the frontend to call a fully qualified backend URL directly.
+VITE_API_BASE_URL=
 EOF
   log "Wrote frontend/.env.local — rebuild frontend after editing (npm run build)."
 fi
