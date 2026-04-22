@@ -3,7 +3,24 @@ import { toast } from 'sonner';
 import type { ErrorResponse } from '@/types/api';
 import { getInviteCode } from './inviteCode';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || '/api';
+function resolveBaseUrl(): string {
+  const explicitBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+  if (explicitBaseUrl) {
+    return explicitBaseUrl;
+  }
+
+  if (import.meta.env.DEV) {
+    return '/api';
+  }
+
+  if (typeof window !== 'undefined') {
+    return `${window.location.protocol}//${window.location.hostname}:8042`;
+  }
+
+  return '/api';
+}
+
+const baseURL = resolveBaseUrl();
 
 export const api = axios.create({
   baseURL,

@@ -19,8 +19,10 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
+BACKEND_HOST="${BACKEND_HOST:-0.0.0.0}"
 BACKEND_PORT="${BACKEND_PORT:-8042}"
 FRONTEND_PORT="${FRONTEND_PORT:-5215}"
+ENABLE_FRONTEND_SERVER="${ENABLE_FRONTEND_SERVER:-1}"
 RUN_DIR="${PROJECT_ROOT}/.run"
 mkdir -p "$RUN_DIR"
 
@@ -48,12 +50,12 @@ start_backend() {
   fi
   [[ -d .venv ]] || die ".venv not found — run scripts/bootstrap.sh first."
 
-  log "Starting backend on :${BACKEND_PORT} …"
+  log "Starting backend on ${BACKEND_HOST}:${BACKEND_PORT} …"
   # shellcheck disable=SC1091
   source .venv/bin/activate
-  nohup env APP_HOST=0.0.0.0 APP_PORT="${BACKEND_PORT}" \
+  nohup env APP_HOST="${BACKEND_HOST}" APP_PORT="${BACKEND_PORT}" \
     .venv/bin/uvicorn app.main:app \
-      --host 0.0.0.0 --port "${BACKEND_PORT}" \
+      --host "${BACKEND_HOST}" --port "${BACKEND_PORT}" \
       >>"$BACKEND_LOG" 2>&1 &
   echo $! > "$BACKEND_PID"
   sleep 1
@@ -65,6 +67,10 @@ start_backend() {
 }
 
 start_frontend() {
+  if [[ "$ENABLE_FRONTEND_SERVER" == "0" ]]; then
+    log "frontend static server disabled (ENABLE_FRONTEND_SERVER=0)"
+    return
+  fi
   if is_running "$FRONTEND_PID"; then
     log "frontend already running (pid=$(cat "$FRONTEND_PID"))"
     return
@@ -131,7 +137,22 @@ case "$cmd" in
     start_frontend
     echo
     status
-    cat <<EOF
+    if [[ "$ENABLE_FRONTEND_SERVER" == "0" ]]; then
+      cat <<EOF
+
+Frontend static server: disabled (expected when using Nginx)
+Backend bind:           http://${BACKEND_HOST}:${BACKEND_PORT}
+Invite codes:           Chrissy, Ethan  (set in the top-right of the UI)
+
+Recommended Nginx setup for this repo:
+  listen on :${FRONTEND_PORT}
+  serve frontend/dist as static files
+  proxy /api/ -> http://127.0.0.1:${BACKEND_PORT}/
+
+If BACKEND_HOST=127.0.0.1, do not open inbound TCP ${BACKEND_PORT}; only open ${FRONTEND_PORT}.
+EOF
+    else
+      cat <<EOF
 
 Open the UI:    http://<server-ip>:${FRONTEND_PORT}
 Backend API:    http://<server-ip>:${BACKEND_PORT}/docs
@@ -139,6 +160,7 @@ Invite codes:   Chrissy, Ethan  (set in the top-right of the UI)
 
 Make sure your cloud security group allows inbound TCP on ${FRONTEND_PORT} and ${BACKEND_PORT}.
 EOF
+    fi
     ;;
   stop)
     stop_one frontend "$FRONTEND_PID"
